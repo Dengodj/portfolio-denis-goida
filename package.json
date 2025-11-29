@@ -7,7 +7,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "serve:ssr:portfolio-denis-goida": "node dist/portfolio-denis-goida/server/server.mjs"
+    "deploy": "ng build --configuration production --base-href=\"/portfolio-denis-goida/\" && npx angular-cli-ghpages --dir=dist/portfolio-denis-goida/browser"
   },
   "prettier": {
     "printWidth": 100,
@@ -42,6 +42,7 @@
     "@angular/compiler-cli": "^21.0.0",
     "@types/express": "^5.0.1",
     "@types/node": "^20.17.19",
+    "angular-cli-ghpages": "^2.0.3",
     "autoprefixer": "^10.4.20",
     "jsdom": "^27.1.0",
     "postcss": "^8.4.47",
