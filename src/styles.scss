@@ -1,0 +1,26 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import './app/styles/variables';
+@import './app/styles/mixins';
+@import './app/styles/animations';
+
+:root {
+  --color-primary: #a855f7;
+  --color-primary-dark: #9333ea;
+  --color-accent: #ec4899;
+  --color-bg-light: #f5fffa;
+  --color-bg: #0a0a0a;
+  --color-bg-card: #111111;
+  --color-text: #e2e8f0;
+  --gradient-primary: linear-gradient(135deg, #a855f7, #ec4899);
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', system-ui, sans-serif;
+  background: var(--color-bg-light);
+  color: var(--color-text);
+  overflow-x: hidden;
+}

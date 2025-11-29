@@ -1,0 +1,79 @@
+@import 'variables';
+@import 'mixins';
+
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: $gradient-hero;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 30% 70%, rgba($color-primary, 0.15), transparent 50%);
+  }
+
+  .hero-content {
+    text-align: center;
+    z-index: 1;
+    padding: 0 20px;
+  }
+
+  .hero-title {
+    font-size: clamp(3rem, 10vw, 7rem);
+    font-weight: 900;
+    margin-bottom: 24px;
+  }
+
+  .gradient-text {
+    background: $gradient-primary;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero-subtitle {
+    font-size: clamp(1.5rem, 5vw, 2.5rem);
+    color: $color-muted;
+    margin-bottom: 48px;
+  }
+
+  .hero-buttons {
+    display: flex;
+    gap: 24px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary,
+  .btn-secondary {
+    padding: 16px 40px;
+    border-radius: 999px;
+    font-weight: 700;
+    font-size: 1.1rem;
+    transition: all 0.4s;
+  }
+
+  .btn-primary {
+    background: $gradient-primary;
+    color: white;
+    box-shadow: $shadow-glow;
+    &:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 0 20px 40px rgba($color-primary, 0.4);
+    }
+  }
+
+  .btn-secondary {
+    border: 2px solid $color-primary;
+    color: $color-primary;
+    &:hover {
+      background: $color-primary;
+      color: white;
+    }
+  }
+}

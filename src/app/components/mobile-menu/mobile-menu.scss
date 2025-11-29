@@ -1,0 +1,186 @@
+@import 'variables';
+
+// ─────── Анимации ───────
+@keyframes slideIn {
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes overlayFade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateX(-40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+// ─────── Обёртка (главное — pointer-events!) ───────
+.mobile-menu-wrapper {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  pointer-events: none; // выключено, пока закрыто
+
+  &.active {
+    pointer-events: auto; // включаем только при открытии
+
+    .menu-overlay {
+      animation: overlayFade 0.5s ease-out forwards;
+    }
+    .menu-panel {
+      animation: slideIn 0.65s cubic-bezier(0.77, 0, 0.18, 1) forwards;
+    }
+  }
+
+  // Важно: возвращаем кликабельность элементам внутри
+  .menu-panel,
+  .menu-close,
+  .menu-links a {
+    pointer-events: auto;
+  }
+}
+
+// ─────── Затемнение фона ───────
+.menu-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.92);
+  backdrop-filter: blur(20px);
+  opacity: 0;
+  cursor: pointer;
+  transition: opacity 0.4s ease;
+}
+
+// ─────── Панель меню ───────
+.menu-panel {
+  position: relative;
+  width: 320px;
+  max-width: 90vw;
+  height: 100dvh;
+  background: linear-gradient(180deg, #0a0a0a 0%, #1a0033 70%, rgba(168, 85, 247, 0.12) 100%);
+  border-right: 1px solid $color-primary;
+  box-shadow: 0 0 100px rgba($color-primary, 0.4);
+  padding: 120px 40px 40px;
+  opacity: 0;
+  transform: translateX(-100%);
+  overflow-y: auto;
+}
+
+// Крестик закрытия
+.menu-close {
+  position: absolute;
+  top: 28px;
+  right: 28px;
+  background: none;
+  border: none;
+  color: #94a3b8;
+  font-size: 44px;
+  font-weight: 100;
+  cursor: pointer;
+  transition: all 0.35s ease;
+
+  &:hover {
+    color: $color-accent;
+    transform: rotate(90deg) scale(1.1);
+    text-shadow: 0 0 25px $color-accent;
+  }
+}
+
+// ─────── Ссылки меню ───────
+.menu-links {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 60px;
+}
+
+.menu-links a {
+  display: block;
+  padding: 18px 0 18px 24px;
+  color: #cbd5e1;
+  font-size: 28px;
+  font-weight: 600;
+  text-decoration: none;
+  position: relative;
+  border-left: 4px solid transparent;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+
+  // Анимация появления только при открытии
+  .mobile-menu-wrapper.active & {
+    &:nth-child(1) {
+      animation: fadeInUp 0.7s ease-out 0.15s both;
+    }
+    &:nth-child(2) {
+      animation: fadeInUp 0.7s ease-out 0.25s both;
+    }
+    &:nth-child(3) {
+      animation: fadeInUp 0.7s ease-out 0.35s both;
+    }
+    &:nth-child(4) {
+      animation: fadeInUp 0.7s ease-out 0.45s both;
+    }
+    &:nth-child(5) {
+      animation: fadeInUp 0.7s ease-out 0.55s both;
+    }
+  }
+
+  &:hover {
+    color: white;
+    background: rgba($color-primary, 0.15);
+    border-left-color: $color-primary;
+    padding-left: 44px;
+    border-radius: 0 12px 12px 0;
+  }
+
+  &.active {
+    color: $color-primary;
+    background: rgba($color-primary, 0.25);
+    border-left-color: $color-accent;
+
+    &::after {
+      content: '→';
+      position: absolute;
+      right: 24px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: $color-accent;
+      font-size: 28px;
+      font-weight: bold;
+    }
+  }
+}
+
+// Адаптив
+@media (max-width: 480px) {
+  .menu-panel {
+    width: 100vw;
+    padding: 120px 30px 40px;
+  }
+  .menu-links a {
+    font-size: 26px;
+    padding-left: 20px;
+  }
+  .menu-close {
+    font-size: 40px;
+    top: 24px;
+    right: 24px;
+  }
+}

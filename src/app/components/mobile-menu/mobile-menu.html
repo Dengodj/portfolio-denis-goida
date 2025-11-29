@@ -1,0 +1,28 @@
+<!-- src/app/components/mobile-menu/mobile-menu.html -->
+<div class="mobile-menu-wrapper" [class.active]="isOpen">
+  <!-- Затемнение фона — клик закрывает меню -->
+  <div class="menu-overlay" (click)="close.emit()"></div>
+
+  <!-- Само меню -->
+  <nav class="menu-panel">
+    <button class="menu-close" (click)="close.emit()">×</button>
+
+    <div class="menu-links">
+      <a
+        routerLink="/"
+        (click)="close.emit()"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+        >Главная</a
+      >
+
+      <a routerLink="/about" (click)="close.emit()" routerLinkActive="active">Обо мне</a>
+
+      <a routerLink="/services" (click)="close.emit()" routerLinkActive="active">Услуги</a>
+
+      <a routerLink="/portfolio" (click)="close.emit()" routerLinkActive="active">Портфолио</a>
+
+      <a routerLink="/contact" (click)="close.emit()" routerLinkActive="active">Контакты</a>
+    </div>
+  </nav>
+</div>
